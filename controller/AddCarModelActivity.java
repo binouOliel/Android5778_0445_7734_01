@@ -15,6 +15,7 @@ import com.example.binyamin.android5778_0445_7734_01.model.backend.Academy_Const
 import com.example.binyamin.android5778_0445_7734_01.model.datasource.List_DBManager;
 import com.example.binyamin.android5778_0445_7734_01.model.entities.BRAND;
 import com.example.binyamin.android5778_0445_7734_01.model.entities.COLOR;
+import com.example.binyamin.android5778_0445_7734_01.model.entities.DOOR;
 import com.example.binyamin.android5778_0445_7734_01.model.entities.LUGGAGE;
 import com.example.binyamin.android5778_0445_7734_01.model.entities.PASSENGERS;
 
@@ -26,10 +27,10 @@ public class AddCarModelActivity extends AppCompatActivity implements View.OnCli
     private Spinner  brandSpinner;
     private Spinner  lugageSpinner;
     private Spinner  passengerSpinner;
-    private Spinner  colorSpinner;
+    private Spinner  doorSpinner;
     private EditText volumeEditText;
     private Button   addButton;
-    private Button kuku;
+    
     List_DBManager list_dbManager = List_DBManager.getInstance();
 
     private void getViews()
@@ -40,7 +41,7 @@ public class AddCarModelActivity extends AppCompatActivity implements View.OnCli
         brandSpinner = (Spinner)findViewById(R.id.brandSpinner) ;
         lugageSpinner = (Spinner)findViewById(R.id.lugageSpinner);
         passengerSpinner = (Spinner)findViewById(R.id.passengerSpinner);
-        colorSpinner = (Spinner)findViewById(R.id.colorSpinner);
+        doorSpinner = (Spinner)findViewById(R.id.colorSpinner);
         volumeEditText = (EditText)findViewById(R.id.volumeMotorEditText);
         addButton = (Button)findViewById(R.id.addButton);
     }
@@ -78,11 +79,11 @@ public class AddCarModelActivity extends AppCompatActivity implements View.OnCli
         passengerSpinner.setAdapter(adapter2);
         passengerSpinner.setPrompt("Passengers");
 
-        ArrayAdapter<PASSENGERS> adapter3 = new ArrayAdapter(this,
-                android.R.layout.simple_spinner_item, COLOR.values());
+        ArrayAdapter<DOOR> adapter3 = new ArrayAdapter(this,
+                android.R.layout.simple_spinner_item, DOOR.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        colorSpinner.setAdapter(adapter3);
-        colorSpinner.setPrompt("Color");
+        doorSpinner.setAdapter(adapter3);
+        doorSpinner.setPrompt("Color");
 
 
     }
@@ -96,7 +97,7 @@ public class AddCarModelActivity extends AppCompatActivity implements View.OnCli
         contentValues.put(Academy_Const.CarModelConst.AIR_C, airCSwitch.isChecked());
         contentValues.put(Academy_Const.CarModelConst.GEARBOX_TYPE, automaticSwitch.isChecked());
         contentValues.put(Academy_Const.CarModelConst.MODEL_NAME, nameCarModelEditText.getText().toString());
-        contentValues.put(Academy_Const.CarModelConst.COLOR, colorSpinner.getSelectedItem().toString());
+        contentValues.put(Academy_Const.CarModelConst.COLOR, doorSpinner.getSelectedItem().toString());
         contentValues.put(Academy_Const.CarModelConst.MOTOR_VOLUME, volumeEditText.getText().toString());
         contentValues.put(Academy_Const.CarModelConst.PASSENGERS, passengerSpinner.getSelectedItem().toString());
 
@@ -136,7 +137,7 @@ public class AddCarModelActivity extends AppCompatActivity implements View.OnCli
         brandSpinner.setSelection(0);
         lugageSpinner.setSelection(0);
         passengerSpinner.setSelection(0);
-        colorSpinner.setSelection(0);
+        doorSpinner.setSelection(0);
         volumeEditText.setText(null);
 
     }

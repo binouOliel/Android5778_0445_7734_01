@@ -13,6 +13,6 @@ public class CarListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_list);
 
-       new Task.ClientListTask(this).execute();
+       new Task.CarModelListTask(this).execute();
     }
 }
