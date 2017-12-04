@@ -45,6 +45,7 @@ public interface DB_manager {
     long addCar(ContentValues car);
     List<Car> getCars();
 
+    long addBranch(ContentValues branch);
     List<Branch> getBranchs();
 
 

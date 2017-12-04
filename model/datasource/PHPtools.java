@@ -63,6 +63,7 @@ public class PHPtools {
 
         // string builder is more effiecient than string for the append method.
         StringBuilder postData = new StringBuilder();
+
         // from map <String , Object> to &key=value ;
         for (String param : params.keySet())
         {
@@ -73,29 +74,36 @@ public class PHPtools {
             postData.append(URLEncoder.encode(String.valueOf(params.get(param)), "UTF-8"));
         }
 
-        URL urlObject = new URL(url);
-        HttpURLConnection connection = (HttpURLConnection) urlObject.openConnection();
-        connection.setRequestMethod("POST");
+        try {
+            URL urlObject = new URL(url);
+            HttpURLConnection connection = (HttpURLConnection) urlObject.openConnection();
+            connection.setRequestMethod("POST");
 
-        connection.setDoOutput(true);
-        OutputStream os = connection.getOutputStream();
-        os.write(postData.toString().getBytes("UTF-8"));
-        os.flush();
-        os.close();
+            connection.setDoOutput(true);
+            OutputStream os = connection.getOutputStream();
+            os.write(postData.toString().getBytes("UTF-8"));
+            os.flush();
+            os.close();
 
-        int responseCode = connection.getResponseCode();
-        if (responseCode == HttpURLConnection.HTTP_OK){ // succes
-            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String line ;
-            StringBuilder response = new StringBuilder();
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK){ // succes
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String line ;
+                StringBuilder response = new StringBuilder();
 
-            while ((line = in.readLine()) != null)
-                response.append(line);
+                while ((line = in.readLine()) != null)
+                    response.append(line);
 
-            in.close();
-            return  response.toString();
+                in.close();
+                return  response.toString();
+            }
+            else return "";
         }
-        else return "";
+        catch (IOException e)
+        {
+            return e.toString();
+        }
+
 
     }
 

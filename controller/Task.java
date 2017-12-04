@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.example.binyamin.android5778_0445_7734_01.R;
 import com.example.binyamin.android5778_0445_7734_01.model.datasource.List_DBManager;
+import com.example.binyamin.android5778_0445_7734_01.model.datasource.MySQL_DBManager;
 import com.example.binyamin.android5778_0445_7734_01.model.entities.CarModel;
 import com.example.binyamin.android5778_0445_7734_01.model.entities.Client;
 
@@ -21,6 +22,7 @@ import java.util.List;
  class Task
 {
     static List_DBManager list_dbManager = List_DBManager.getInstance();
+    static MySQL_DBManager mySQL_dbManager = MySQL_DBManager.getInstance();
 
 
    static class ClientListTask extends AsyncTask< Integer, Void , List<Client>> {
@@ -32,7 +34,7 @@ import java.util.List;
 
        @Override
         protected List<Client> doInBackground(Integer... choice) {
-            return list_dbManager.getClients();
+            return mySQL_dbManager.getClients();
         }
 
        @Override
@@ -83,7 +85,7 @@ import java.util.List;
         protected Long doInBackground(ContentValues... contentValues) {
 
             if(contentValues[0] != null)
-            return list_dbManager.addClient(contentValues[0]);
+            return mySQL_dbManager.addClient(contentValues[0]);
 
             else
                 return null;
@@ -116,7 +118,7 @@ import java.util.List;
         @Override
         protected Long doInBackground(ContentValues... contentValues) {
             if(contentValues[0] != null)
-                return list_dbManager.addCarModel(contentValues[0]);
+                return mySQL_dbManager.addCarModel(contentValues[0]);
 
             else
                 return null;

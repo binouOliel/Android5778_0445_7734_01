@@ -7,14 +7,15 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.example.binyamin.android5778_0445_7734_01.R;
 import com.example.binyamin.android5778_0445_7734_01.model.backend.Academy_Const;
 import com.example.binyamin.android5778_0445_7734_01.model.datasource.List_DBManager;
 import com.example.binyamin.android5778_0445_7734_01.model.entities.BRAND;
-import com.example.binyamin.android5778_0445_7734_01.model.entities.COLOR;
 import com.example.binyamin.android5778_0445_7734_01.model.entities.DOOR;
 import com.example.binyamin.android5778_0445_7734_01.model.entities.LUGGAGE;
 import com.example.binyamin.android5778_0445_7734_01.model.entities.PASSENGERS;
@@ -27,11 +28,39 @@ public class AddCarModelActivity extends AppCompatActivity implements View.OnCli
     private Spinner  brandSpinner;
     private Spinner  lugageSpinner;
     private Spinner  passengerSpinner;
-    private Spinner  doorSpinner;
-    private EditText volumeEditText;
+
+    private TextView doorTextView;
     private Button   addButton;
+    private ImageButton   downButton;
+    private ImageButton   upButton;
     
     List_DBManager list_dbManager = List_DBManager.getInstance();
+
+    private void upButtonClick()
+    {
+        int value = Integer.parseInt(doorTextView.getText().toString());
+
+        if (value < 5)
+        {
+            value++;
+            doorTextView.setText(value);
+        }
+
+
+    }
+    private void downButtonClick () {
+
+        int value = Integer.parseInt(doorTextView.getText().toString());
+
+        if (value > 1)
+        {
+            value--;
+            doorTextView.setText(value);
+        }
+
+    }
+
+
 
     private void getViews()
     {
@@ -41,14 +70,19 @@ public class AddCarModelActivity extends AppCompatActivity implements View.OnCli
         brandSpinner = (Spinner)findViewById(R.id.brandSpinner) ;
         lugageSpinner = (Spinner)findViewById(R.id.lugageSpinner);
         passengerSpinner = (Spinner)findViewById(R.id.passengerSpinner);
-        doorSpinner = (Spinner)findViewById(R.id.colorSpinner);
-        volumeEditText = (EditText)findViewById(R.id.volumeMotorEditText);
+
+        doorTextView = (TextView) findViewById(R.id.volumetextView);
         addButton = (Button)findViewById(R.id.addButton);
+        downButton = (ImageButton)findViewById(R.id.downButton);
+        upButton = (ImageButton)findViewById(R.id.upButton);
     }
 
     private void setOnClickListeners() {
         if (addButton != null) {
             addButton.setOnClickListener(this);
+
+            downButton.setOnClickListener(this);
+            upButton.setOnClickListener(this);
         }
     }
 
@@ -95,10 +129,10 @@ public class AddCarModelActivity extends AppCompatActivity implements View.OnCli
         contentValues.put(Academy_Const.CarModelConst.COMPANY_NAME , brandSpinner.getSelectedItem().toString());
         contentValues.put(Academy_Const.CarModelConst.LUGAGE_COMPARTMENT, lugageSpinner.getSelectedItem().toString());
         contentValues.put(Academy_Const.CarModelConst.AIR_C, airCSwitch.isChecked());
-        contentValues.put(Academy_Const.CarModelConst.GEARBOX_TYPE, automaticSwitch.isChecked());
+        contentValues.put(Academy_Const.CarModelConst.IS_AUTOMATIC, automaticSwitch.isChecked());
         contentValues.put(Academy_Const.CarModelConst.MODEL_NAME, nameCarModelEditText.getText().toString());
-        contentValues.put(Academy_Const.CarModelConst.COLOR, doorSpinner.getSelectedItem().toString());
-        contentValues.put(Academy_Const.CarModelConst.MOTOR_VOLUME, volumeEditText.getText().toString());
+        //contentValues.put(Academy_Const.CarModelConst.DOOR, doorSpinner.getSelectedItem().toString());
+        contentValues.put(Academy_Const.CarModelConst.DOOR, doorTextView.getText().toString());
         contentValues.put(Academy_Const.CarModelConst.PASSENGERS, passengerSpinner.getSelectedItem().toString());
 
 
@@ -124,6 +158,12 @@ public class AddCarModelActivity extends AppCompatActivity implements View.OnCli
                 addCarModel();
                 refreshInputsText();
                 break;
+            case R.id.downButton:
+                downButtonClick();
+                break;
+            case R.id.upButton:
+                upButtonClick();
+                break;
 
 
 
@@ -137,8 +177,8 @@ public class AddCarModelActivity extends AppCompatActivity implements View.OnCli
         brandSpinner.setSelection(0);
         lugageSpinner.setSelection(0);
         passengerSpinner.setSelection(0);
-        doorSpinner.setSelection(0);
-        volumeEditText.setText(null);
+        //doorSpinner.setSelection(0);
+        doorTextView.setText(0);
 
     }
 }

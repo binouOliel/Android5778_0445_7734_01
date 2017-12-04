@@ -69,11 +69,11 @@ public class CarModel {
         this.passengers = passengers;
     }
 
-    public DOOR getColor() {
+    public DOOR getDoor() {
         return door;
     }
 
-    public void setColor(DOOR door) {
+    public void setDoor(DOOR door) {
         this.door = door;
     }
 

@@ -25,7 +25,16 @@ import java.util.List;
 
 public class MySQL_DBManager implements DB_manager {
 
-    private String WEB_URL = "obinyami.vlab.jct.ac.il/Academy/";
+    private static final MySQL_DBManager ourInstance = new MySQL_DBManager();
+
+    public static MySQL_DBManager getInstance() {
+        return ourInstance;
+    }
+
+    private MySQL_DBManager() {
+    }
+
+    private String WEB_URL = "https://obinyami.vlab.jct.ac.il/Academy";
 
 
 
@@ -34,7 +43,7 @@ public class MySQL_DBManager implements DB_manager {
 
       try
       {
-          String result = PHPtools.POST(WEB_URL+ "/add_client.php", values);
+          String result = PHPtools.POST(WEB_URL + "/add_client.php", values);
           long id = Long.parseLong(result);
 
           Log.i("addClient: " , result);
@@ -90,8 +99,23 @@ public class MySQL_DBManager implements DB_manager {
     }
 
     @Override
-    public long addCarModel(ContentValues carModel) {
-        return 0;
+    public long addCarModel(ContentValues values) {
+        try
+        {
+            String result = PHPtools.POST(WEB_URL + "/add_car_model.php", values);
+            long id = Long.parseLong(result);
+
+            Log.i("addCarModel: " , result);
+            return id;
+
+
+
+        }
+        catch (Exception e )
+        {
+            Log.e("addCarModelException: \n" , e.toString());
+            return  -1;
+        }
     }
 
     @Override

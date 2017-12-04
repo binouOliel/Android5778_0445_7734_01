@@ -3,12 +3,10 @@ package com.example.binyamin.android5778_0445_7734_01.model.backend;
 import android.content.ContentValues;
 
 import  com.example.binyamin.android5778_0445_7734_01.model.entities.Branch;
-import com.example.binyamin.android5778_0445_7734_01.model.entities.COLOR;
 import com.example.binyamin.android5778_0445_7734_01.model.entities.Car;
 import com.example.binyamin.android5778_0445_7734_01.model.entities.CarModel;
 import com.example.binyamin.android5778_0445_7734_01.model.entities.Client;
 import com.example.binyamin.android5778_0445_7734_01.model.entities.DOOR;
-import com.example.binyamin.android5778_0445_7734_01.model.entities.GEARBOX_TYPE;
 import com.example.binyamin.android5778_0445_7734_01.model.entities.LUGGAGE;
 import com.example.binyamin.android5778_0445_7734_01.model.entities.PASSENGERS;
 
@@ -54,9 +52,9 @@ public class Academy_Const {
         public static final String COMPANY_NAME = "companyName";
         public static final String MODEL_NAME = "modelName";
         public static final String MOTOR_VOLUME = "motorVolume";
-        public static final String GEARBOX_TYPE = "gearboxType";
+        public static final String IS_AUTOMATIC = "isAutomatic";
         public static final String PASSENGERS = "passengers";
-        public static final String COLOR = "color";
+        public static final String DOOR = "door";
         public static final String LUGAGE_COMPARTMENT = "lugageCompartment";
         public static final String AIR_C = "airC";
 
@@ -99,8 +97,8 @@ public class Academy_Const {
         contentValues.put(CarModelConst.MODEL_NAME, carModel.getModelName());
         contentValues.put(CarModelConst.COMPANY_NAME, carModel.getModelCompanyName());
         contentValues.put(CarModelConst.LUGAGE_COMPARTMENT, carModel.getLuggageCompartment().toString());
-        contentValues.put(CarModelConst.GEARBOX_TYPE, carModel.isAutomatic());
-        contentValues.put(CarModelConst.COLOR, carModel.getColor().toString());
+        contentValues.put(CarModelConst.IS_AUTOMATIC, carModel.isAutomatic());
+        contentValues.put(CarModelConst.DOOR, carModel.getDoor().toString());
         contentValues.put(CarModelConst.AIR_C, carModel.isAirC());
 
         return contentValues;
@@ -142,8 +140,8 @@ public class Academy_Const {
             carModel.setModelId(contentValues.getAsLong(CarModelConst.ID));
 
         carModel.setAirC(contentValues.getAsBoolean(CarModelConst.AIR_C));
-        carModel.setColor((DOOR.valueOf(contentValues.getAsString(CarModelConst.COLOR))) );
-        carModel.setAutomatic( contentValues.getAsBoolean(CarModelConst.GEARBOX_TYPE));
+        carModel.setDoor((DOOR.valueOf(contentValues.getAsString(CarModelConst.DOOR))) );
+        carModel.setAutomatic( contentValues.getAsBoolean(CarModelConst.IS_AUTOMATIC));
         carModel.setLuggageCompartment((LUGGAGE.valueOf(contentValues.getAsString(CarModelConst.LUGAGE_COMPARTMENT))));
         carModel.setModelCompanyName(contentValues.getAsString(CarModelConst.COMPANY_NAME));
         carModel.setModelName(contentValues.getAsString(CarModelConst.MODEL_NAME));

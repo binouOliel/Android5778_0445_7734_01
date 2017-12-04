@@ -3,13 +3,10 @@ package com.example.binyamin.android5778_0445_7734_01.controller;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.binyamin.android5778_0445_7734_01.R;
@@ -82,7 +79,7 @@ public class CarModelAdapter extends ArrayAdapter<CarModel> {
             gearBoxTextBox.setText("AUTOMATIC");
         else gearBoxTextBox.setText("MANUAL");
 
-        switch(currentCarModel.getColor())
+        switch(currentCarModel.getDoor())
         {
             case TWO: doorTextView.setText("2 doors");
                 break;
